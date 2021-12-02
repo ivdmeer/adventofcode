@@ -1,6 +1,8 @@
 package nl.imm.adventofcode.year2021.day1.part1;
 
+import nl.imm.adventofcode.year2021.FileHelper;
 import nl.imm.adventofcode.year2021.day1.part1.Measurements;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -22,14 +24,9 @@ class MeasurementsTest {
 	private final Path resourceFile = Paths.get(
 			"src/main/resources/year2021/day1/measurements.txt");
 
-	Path getResourceFilePath() {
-		return resourceFile;
-	}
-
 	@Test
-	void test() throws IOException {
-
-		List<Integer> list = Files.readAllLines(getResourceFilePath(), Charset.defaultCharset())
+	void exerciseTest() {
+		List<Integer> list = FileHelper.readAllLinesFromFile(resourceFile)
 				.stream()
 				.map(Integer::parseInt)
 				.collect(Collectors.toList());
@@ -38,6 +35,7 @@ class MeasurementsTest {
 		long countIncreasedMeasurements = measurements.countIncreasedMeasurements();
 
 		System.out.println("Amount increased: " + countIncreasedMeasurements);
+		Assertions.assertTrue(countIncreasedMeasurements > 0);
 	}
 
 }
