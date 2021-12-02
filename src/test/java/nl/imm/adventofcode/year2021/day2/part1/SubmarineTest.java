@@ -17,11 +17,11 @@ class SubmarineTest {
 
 	// https://adventofcode.com/2021/day/2
 
-	private final Path testDataFile = Paths.get(
-			"src/main/resources/year2021/day2/example-data-part1.txt");
-
 	private final Path exerciseDataFile = Paths.get(
 			"src/main/resources/year2021/day2/data-part1.txt");
+
+	private final Path testDataFile = Paths.get(
+			"src/main/resources/year2021/day2/example-data-part1.txt");
 
 	@DisplayName("Testing with the example data given for this exercise")
 	@Test

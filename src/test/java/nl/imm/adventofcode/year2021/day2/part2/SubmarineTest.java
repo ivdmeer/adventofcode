@@ -1,7 +1,6 @@
 package nl.imm.adventofcode.year2021.day2.part2;
 
 import nl.imm.adventofcode.year2021.FileHelper;
-import nl.imm.adventofcode.year2021.day2.part1.Submarine;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -18,11 +17,11 @@ class SubmarineTest {
 
 	// https://adventofcode.com/2021/day/2#part2
 
-	private final Path testDataFile = Paths.get(
-			"src/main/resources/year2021/day2/example-data-part1.txt");
-
 	private final Path exerciseDataFile = Paths.get(
 			"src/main/resources/year2021/day2/data-part1.txt");
+
+	private final Path testDataFile = Paths.get(
+			"src/main/resources/year2021/day2/example-data-part1.txt");
 
 	@DisplayName("Testing with the example data given for this exercise")
 	@Test
@@ -37,7 +36,7 @@ class SubmarineTest {
 		linesFromFile.forEach(submarine::moveToDirection);
 
 		// then
-		assertEquals(150, submarine.calculatePosition());
+		assertEquals(900, submarine.calculatePosition());
 	}
 
 
@@ -54,6 +53,6 @@ class SubmarineTest {
 
 		// then
 		System.out.println("The calculated position is: " + submarine.calculatePosition());
-		assertEquals(2070300, submarine.calculatePosition());
+		assertEquals(2078985210, submarine.calculatePosition());
 	}
 }
