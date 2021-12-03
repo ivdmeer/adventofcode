@@ -1,4 +1,4 @@
-package nl.imm.adventofcode.year2021.day3;
+package nl.imm.adventofcode.year2021.day3.part1;
 
 import nl.imm.adventofcode.year2021.FileHelper;
 import org.junit.jupiter.api.Assertions;
