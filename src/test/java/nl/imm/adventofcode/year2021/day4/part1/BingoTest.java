@@ -93,12 +93,12 @@ class BingoTest {
 					lastNumber = number;
 					sum = number * cardWithBingo.calculateUnmarkedNumbers();
 					cardWithBingoList.add(bingoCard);
-					//break stopBingo;
+					break stopBingo;
 				}
 			}
-			if (cardWithBingoList.size() > 0) {
+/*			if (cardWithBingoList.size() > 0) {
 				break stopBingo;
-			}
+			}*/
 		}
 
 		// then
