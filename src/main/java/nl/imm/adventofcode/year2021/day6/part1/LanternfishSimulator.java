@@ -9,13 +9,13 @@ import java.util.stream.Collectors;
 /**
  * @author Ivo van der Meer
  */
-public class LaternfishSimulator {
+public class LanternfishSimulator {
 
 	private final String initialState;
 
 	private List<Lanternfish> lanternfishList;
 
-	public LaternfishSimulator(String initialState) {
+	public LanternfishSimulator(String initialState) {
 		this.initialState = initialState;
 		initialSimulation();
 	}
