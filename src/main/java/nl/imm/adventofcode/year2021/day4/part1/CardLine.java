@@ -21,7 +21,10 @@ public class CardLine {
 	}
 
 	public CardLine(String numbers) {
-		this.numbers = Arrays.asList(numbers.split("\\s+")).stream().filter(StringUtils::hasText).map(Integer::parseInt).collect(Collectors.toList());
+		this.numbers = Arrays.stream(numbers.split("\\s+"))
+				.filter(StringUtils::hasText)
+				.map(Integer::parseInt)
+				.collect(Collectors.toList());
 	}
 
 	public void checkNumber(int number) {
