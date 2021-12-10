@@ -88,7 +88,7 @@ class BingoTest {
 		for (Integer number : numbersPicked) {
 			for (BingoCard bingoCard : bingoCards) {
 				bingoCard.checkNumber(number);
-				if (bingoCard.isBottomLineBingo()) {
+				if (bingoCard.isBingo()) {
 					cardWithBingo = bingoCard;
 					lastNumber = number;
 					sum = number * cardWithBingo.calculateUnmarkedNumbers();
@@ -102,9 +102,9 @@ class BingoTest {
 		}
 
 		// then
-		Assertions.assertEquals(53, lastNumber);
-		Assertions.assertEquals(776, cardWithBingo.calculateUnmarkedNumbers());
-		Assertions.assertEquals(41128, sum);
+		Assertions.assertEquals(17, lastNumber);
+		Assertions.assertEquals(829, cardWithBingo.calculateUnmarkedNumbers());
+		Assertions.assertEquals(14093, sum);
 	}
 
 	private List<BingoCard> parseLines(List<String> lines) {
