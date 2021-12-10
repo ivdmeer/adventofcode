@@ -1,6 +1,8 @@
 package nl.imm.adventofcode.year2021.day3.part2;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -24,7 +26,7 @@ public class DiagnosticsCalculator {
 	}
 
 	public int calculateCO2ScrubberRating() {
-		String cO2ScrubberRate = findTheBestMatchingValue(invertBits(calculatedGamaRate()), "0");
+		String cO2ScrubberRate = calculateMostCommonBits("0");
 		return Integer.parseInt(cO2ScrubberRate, 2);
 	}
 
@@ -33,8 +35,7 @@ public class DiagnosticsCalculator {
 	}
 
 	public int calculateOxygenGeneratorRating() {
-		String gamaRate = calculatedGamaRate();
-		String oxygenGeneratorRate = findTheBestMatchingValue(gamaRate, "1");
+		String oxygenGeneratorRate = calculateMostCommonBits("1");
 		return Integer.parseInt(oxygenGeneratorRate, 2);
 	}
 
@@ -70,38 +71,62 @@ public class DiagnosticsCalculator {
 				.collect(Collectors.joining(""));
 	}
 
-	private String findTheBestMatchingValue(String rate, String suffix) {
+	/**
+	 * Calculate the most common bit at a column in a list and remove all values that do not share
+	 * that common bit.
+	 *
+	 */
+	private String calculateMostCommonBits(String bitCriteria) {
 		String bestMatch = null;
-		List<String> startData = linesFromFile;
-		for (int index = 0; index < rate.length(); index++) {
-			String searchString = rate.substring(0, index + 1);
-			List<String> results = startData.stream()
-					.filter(item -> item.startsWith(searchString))
-					.collect(Collectors.toList());
+		List<String> commonBitList = linesFromFile;
+		String ZERO_BIT = "0";
+		String ONE_BIT = "1";
 
-			startData = results;
-
-			if (results.size() > 2) {
-				continue;
-			}
-
-			if (results.size() == 2) {
-				int secondIndex = index + 2;
-				while (bestMatch == null) {
-					for (String item : startData) {
-						String substring = item.substring(0, secondIndex);
-						if (substring.endsWith(suffix)) {
-							bestMatch = item;
-							break;
-						}
+		while (bestMatch == null) {
+			for (int index = 0; index < calculatedGamaRate().length(); index++) {
+				Map<Integer, List<String>> commonBitMap = new HashMap<>();
+				commonBitMap.put(0, new ArrayList<>());
+				commonBitMap.put(1, new ArrayList<>());
+				for (String line : commonBitList) {
+					String bit = line.substring(index, index + 1);
+					if (bit.equals(ZERO_BIT)) {
+						commonBitMap.get(Integer.parseInt(ZERO_BIT)).add(line);
+					} else {
+						commonBitMap.get(Integer.parseInt(ONE_BIT)).add(line);
 					}
-					secondIndex++;
 				}
 
-				break;
-			}
+				if (commonBitMap.get(Integer.parseInt(ZERO_BIT)).size() > commonBitMap.get(Integer.parseInt(ONE_BIT)).size()) {
 
-			bestMatch = results.iterator().next();
+					if (ZERO_BIT.equals(bitCriteria)) {
+						// keep lowest
+						commonBitList = commonBitMap.get(Integer.parseInt(ONE_BIT));
+					} else {
+						// keep highest
+						commonBitList = commonBitMap.get(Integer.parseInt(ZERO_BIT));
+					}
+
+				} else if (commonBitMap.get(Integer.parseInt(ONE_BIT)).size() > commonBitMap.get(Integer.parseInt(ZERO_BIT)).size()) {
+
+					if (ZERO_BIT.equals(bitCriteria)) {
+						// keep lowest
+						commonBitList = commonBitMap.get(Integer.parseInt(ZERO_BIT));
+					} else {
+						// keep highest
+						commonBitList = commonBitMap.get(Integer.parseInt(ONE_BIT));
+					}
+				} else {
+					// both bits are of equal count, now check the bitCriteria
+					if (ZERO_BIT.equals(bitCriteria)) {
+						commonBitList = commonBitMap.get(Integer.parseInt(ZERO_BIT));
+					} else {
+						commonBitList = commonBitMap.get(Integer.parseInt(ONE_BIT));
+					}
+				}
+				if (commonBitList.size() == 1) {
+					bestMatch = commonBitList.iterator().next();
+				}
+			}
 		}
 		return bestMatch;
 	}

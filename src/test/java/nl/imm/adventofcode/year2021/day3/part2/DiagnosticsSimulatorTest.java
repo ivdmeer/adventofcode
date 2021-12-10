@@ -40,8 +40,8 @@ class DiagnosticsSimulatorTest {
 		DiagnosticsCalculator diagnosticsCalculator = new DiagnosticsCalculator(lineParser, linesFromFile);
 
 		Assertions.assertEquals(3277364, diagnosticsCalculator.calculatePowerConsumption());
-		Assertions.assertEquals(3005, diagnosticsCalculator.calculateOxygenGeneratorRating());
-		Assertions.assertEquals(1100, diagnosticsCalculator.calculateCO2ScrubberRating());
-		Assertions.assertEquals(3305500, diagnosticsCalculator.calculateLifeSupportRating());
+		Assertions.assertEquals(3583, diagnosticsCalculator.calculateOxygenGeneratorRating());
+		Assertions.assertEquals(1601, diagnosticsCalculator.calculateCO2ScrubberRating());
+		Assertions.assertEquals(5736383, diagnosticsCalculator.calculateLifeSupportRating());
 	}
 }
