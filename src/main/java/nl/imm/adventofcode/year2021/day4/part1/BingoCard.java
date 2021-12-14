@@ -55,7 +55,7 @@ public class BingoCard {
 	}
 
 	public boolean isBingo() {
-		return isFullBingo() || isAnyRowBingo();
+		return isAnyRowBingo() || isFullBingo();
 	}
 
 	public boolean isBottomLineBingo() {
