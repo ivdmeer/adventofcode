@@ -10,11 +10,13 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.NavigableMap;
 import java.util.Optional;
+import java.util.Set;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
@@ -45,26 +47,28 @@ class BingoTest {
 				.map(Integer::parseInt)
 				.collect(Collectors.toList());
 
-		NavigableMap<Integer, BingoCard> cardsWithBingoMap = new TreeMap<>();
+		Map<Integer, BingoCard> cardsWithBingoMap = new HashMap<>();
+		List<BingoCard> bingoCardsToWorkWith = new ArrayList<>(bingoCards);
 		// when
 		for (Integer number : numbersPicked) {
-			bingoCards.forEach(bingoCard -> bingoCard.checkNumber(number));
-			Optional<BingoCard> foundBingoCard = bingoCards.stream()
+			bingoCardsToWorkWith.forEach(bingoCard -> bingoCard.checkNumber(number));
+			Optional<BingoCard> foundBingoCard = bingoCardsToWorkWith.stream()
 					.filter(BingoCard::isBingo)
 					.findFirst();
 
 			if (foundBingoCard.isPresent()) {
+				bingoCardsToWorkWith.remove(foundBingoCard.get());
 				cardsWithBingoMap.put(number, foundBingoCard.get());
-				continue;
 			}
 		}
 
-		// then
-		Map.Entry<Integer, BingoCard> lastEntry = cardsWithBingoMap.lastEntry();
-		Integer lastNumber = lastEntry.getKey();
-		BingoCard cardWithBingo = lastEntry.getValue();
-		int sum = lastNumber * cardWithBingo.calculateUnmarkedNumbers();
+		Integer lastNumber = 0;
+		for (Integer key :cardsWithBingoMap.keySet()) {
+			lastNumber = key;
+		}
 
+		BingoCard cardWithBingo = cardsWithBingoMap.get(lastNumber);
+		int sum = lastNumber * cardWithBingo.calculateUnmarkedNumbers();
 
 		// then
 		Assertions.assertEquals(13, lastNumber);
@@ -86,29 +90,36 @@ class BingoTest {
 				.map(Integer::parseInt)
 				.collect(Collectors.toList());
 
-		NavigableMap<Integer, BingoCard> cardsWithBingoMap = new TreeMap<>();
+		Map<Integer, List<BingoCard>> cardsWithBingoMap = new LinkedHashMap<>();
+		List<BingoCard> bingoCardsToWorkWith = new ArrayList<>(bingoCards);
 		// when
 		for (Integer number : numbersPicked) {
-			bingoCards.forEach(bingoCard -> bingoCard.checkNumber(number));
-			Optional<BingoCard> foundBingoCard = bingoCards.stream()
-					.filter(BingoCard::isBingo)
-					.findFirst();
-
-			if (foundBingoCard.isPresent()) {
-				cardsWithBingoMap.put(number, foundBingoCard.get());
-				continue;
+			for (BingoCard card: bingoCardsToWorkWith) {
+				card.checkNumber(number);
+				if (card.isBingo()) {
+					cardsWithBingoMap.putIfAbsent(number, new ArrayList<>());
+					cardsWithBingoMap.get(number).add(card);
+				}
+			}
+			if (cardsWithBingoMap.containsKey(number) && !cardsWithBingoMap.get(number).isEmpty()) {
+				bingoCardsToWorkWith.removeAll(cardsWithBingoMap.get(number));
 			}
 		}
 
-		// then
-		Map.Entry<Integer, BingoCard> lastEntry = cardsWithBingoMap.lastEntry();
-		Integer lastNumber = lastEntry.getKey();
-		BingoCard cardWithBingo = lastEntry.getValue();
+		Integer lastNumber = 0;
+		BingoCard cardWithBingo = null;
+		for (Integer key: cardsWithBingoMap.keySet() ) {
+			lastNumber = key;
+			for (BingoCard card: cardsWithBingoMap.get(key)) {
+				cardWithBingo = card;
+			}
+		}
+
 		int sum = lastNumber * cardWithBingo.calculateUnmarkedNumbers();
 
-		Assertions.assertEquals(99, lastNumber);
-		Assertions.assertEquals(0, cardWithBingo.calculateUnmarkedNumbers());
-		Assertions.assertEquals(0, sum);
+		Assertions.assertEquals(36, lastNumber);
+		Assertions.assertEquals(483, cardWithBingo.calculateUnmarkedNumbers());
+		Assertions.assertEquals(17388, sum);
 	}
 
 	private List<BingoCard> parseLines(List<String> lines) {

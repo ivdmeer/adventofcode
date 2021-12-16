@@ -38,7 +38,9 @@ public class CardLine {
 	}
 
 	public List<Integer> getUnmarkedNumbers() {
-		return numbers.stream().filter(number -> !markedNumbers.contains(number)).collect(Collectors.toList());
+		return numbers.stream()
+				.filter(number -> !markedNumbers.contains(number))
+				.collect(Collectors.toList());
 	}
 
 	public boolean isBingo() {
