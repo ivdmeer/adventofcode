@@ -45,9 +45,11 @@ class HydrothermalVentureTest {
 
 		Assertions.assertTrue(!ventLines.isEmpty());
 		Map<Coordinate, Integer> overlappingCount = getOverlappingCount(ventLines);
-		printGrid(overlappingCount);
+		String printedGrid = printGrid(overlappingCount);
 
 		Assertions.assertEquals(5, calculateOverlappingAmount(overlappingCount));
+		Assertions.assertEquals(exampleGrid(), printedGrid);
+		System.out.println(printedGrid);
 	}
 
 	@Test
@@ -79,20 +81,36 @@ class HydrothermalVentureTest {
 		return overlappingCountMap;
 	}
 
-	private void printGrid(Map<Coordinate, Integer> numbersPerCoordinate) {
+	private String printGrid(Map<Coordinate, Integer> numbersPerCoordinate) {
 		int maxX = 9;
 		int maxY = 9;
+		StringBuilder grid = new StringBuilder();
 
 		for (int y = 0; y <= maxY; y++) {
 			for (int x = 0; x <= maxX; x++) {
 				Coordinate coordinate = new Coordinate(x, y);
 				if (numbersPerCoordinate.containsKey(coordinate) && numbersPerCoordinate.get(coordinate) > 0) {
-					System.out.printf(" %d ", numbersPerCoordinate.get(coordinate));
+					grid.append(numbersPerCoordinate.get(coordinate));
 				} else {
-					System.out.print(" . ");
+					grid.append(".");
 				}
 			}
-			System.out.print("\n");
+			grid.append("\n");
 		}
+
+		return grid.toString();
+	}
+
+	private String exampleGrid() {
+		return  ".......1..\n" +
+				"..1....1..\n" +
+				"..1....1..\n" +
+				".......1..\n" +
+				".112111211\n" +
+				"..........\n" +
+				"..........\n" +
+				"..........\n" +
+				"..........\n" +
+				"222111....\n";
 	}
 }
