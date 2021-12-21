@@ -1,7 +1,6 @@
 package nl.imm.adventofcode.year2021.day5.part1;
 
 import nl.imm.adventofcode.year2021.FileHelper;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.nio.file.Path;
@@ -10,6 +9,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 /**
  * @author Ivo van der Meer
@@ -43,12 +45,12 @@ class HydrothermalVentureTest {
 				.filter(VentLine::hasCoordinates)
 				.collect(Collectors.toList());
 
-		Assertions.assertTrue(!ventLines.isEmpty());
+		assertFalse(ventLines.isEmpty());
 		Map<Coordinate, Integer> overlappingCount = getOverlappingCount(ventLines);
 		String printedGrid = printGrid(overlappingCount);
 
-		Assertions.assertEquals(5, calculateOverlappingAmount(overlappingCount));
-		Assertions.assertEquals(exampleGrid(), printedGrid);
+		assertEquals(5, calculateOverlappingAmount(overlappingCount));
+		assertEquals(exampleGrid(), printedGrid);
 		System.out.println(printedGrid);
 	}
 
@@ -61,10 +63,23 @@ class HydrothermalVentureTest {
 				.filter(VentLine::hasCoordinates)
 				.collect(Collectors.toList());
 
-		Assertions.assertTrue(!ventLines.isEmpty());
+		assertFalse(ventLines.isEmpty());
 		Map<Coordinate, Integer> overlappingCount = getOverlappingCount(ventLines);
 
-		Assertions.assertEquals(7436, calculateOverlappingAmount(overlappingCount));
+		assertEquals(7436, calculateOverlappingAmount(overlappingCount));
+	}
+
+	private String exampleGrid() {
+		return ".......1..\n" +
+				"..1....1..\n" +
+				"..1....1..\n" +
+				".......1..\n" +
+				".112111211\n" +
+				"..........\n" +
+				"..........\n" +
+				"..........\n" +
+				"..........\n" +
+				"222111....\n";
 	}
 
 	private Map<Coordinate, Integer> getOverlappingCount(List<VentLine> lines) {
@@ -99,18 +114,5 @@ class HydrothermalVentureTest {
 		}
 
 		return grid.toString();
-	}
-
-	private String exampleGrid() {
-		return  ".......1..\n" +
-				"..1....1..\n" +
-				"..1....1..\n" +
-				".......1..\n" +
-				".112111211\n" +
-				"..........\n" +
-				"..........\n" +
-				"..........\n" +
-				"..........\n" +
-				"222111....\n";
 	}
 }
