@@ -33,17 +33,6 @@ class LanternfishSimulatorTest {
 	}
 
 	@Test
-	void exampleDay256Test() {
-
-		List<String> strings = FileHelper.readAllLinesFromFile(testDataFile);
-
-		LanternfishSimulator lanternfishSimulator = new LanternfishSimulator(parseSimulationValue(strings.get(0)));
-		lanternfishSimulator.simulateDay(256);
-
-		Assertions.assertEquals(26984457539L, lanternfishSimulator.getFishCount());
-	}
-
-	@Test
 	void exampleDay80Test() {
 
 		List<String> strings = FileHelper.readAllLinesFromFile(testDataFile);
