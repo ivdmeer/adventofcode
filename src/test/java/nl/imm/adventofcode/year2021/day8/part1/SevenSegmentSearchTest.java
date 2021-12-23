@@ -66,10 +66,4 @@ class SevenSegmentSearchTest {
 		return Arrays.asList(split[1].split("\\s"));
 	}
 
-	void test() {
-		String bla = "fdgacbe";
-
-	}
-
-
 }
