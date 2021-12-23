@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 /**
  * @author Ivo van der Meer
  */
-public class FuelOptimizerTest {
+class FuelOptimizerTest {
 
 	// https://adventofcode.com/2021/day/7
 
@@ -61,7 +61,7 @@ public class FuelOptimizerTest {
 		assertEquals(339, cheapestAlignedPosition);
 
 		long fuelConsumption = cheapestAlignedPositionEntry.getValue();
-		assertEquals(355764, fuelConsumption); // 65 best post and fuel consumption 431292 too high
+		assertEquals(355764, fuelConsumption);
 	}
 
 	private Map<Integer, Long> calculateAllFuelConsumptions(List<Integer> allAlignmentPositions) {
