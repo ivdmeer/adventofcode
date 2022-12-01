@@ -35,12 +35,11 @@ class CalorieCountingTest {
 		Map<Integer, Integer> calloriesMap = calloriesToMap(linesFromFile);
 
 		// when
-		Map.Entry<Integer, Integer> highestValue = determineHighestCallories(calloriesMap);
+		int highestValue = determineHighestCallories(calloriesMap);
 
 		// then
 		assertNotNull(highestValue);
-		assertEquals(24000, highestValue.getKey());
-		assertEquals(4, highestValue.getValue());
+		assertEquals(45000, highestValue);
 	}
 
 	@Test
@@ -50,12 +49,10 @@ class CalorieCountingTest {
 		Map<Integer, Integer> calloriesMap = calloriesToMap(linesFromFile);
 
 		// when
-		Map.Entry<Integer, Integer> highestValue = determineHighestCallories(calloriesMap);
+		int highestValue = determineHighestCallories(calloriesMap);
 
 		// then
-		assertNotNull(highestValue);
-		assertEquals(66306, highestValue.getKey());
-		assertEquals(31, highestValue.getValue());
+		assertEquals(195292, highestValue);
 	}
 
 	private Map<Integer, Integer> calloriesToMap(List<String> linesFromFile) {
@@ -77,14 +74,25 @@ class CalorieCountingTest {
 		return calloriesMap;
 	}
 
-	private Map.Entry<Integer, Integer> determineHighestCallories(Map<Integer, Integer> calloriesMap) {
-		Map.Entry<Integer, Integer> highest = null;
+	private int determineHighestCallories(Map<Integer, Integer> calloriesMap) {
+
+		int highest1 = 0;
+		int highest2 = 0;
+		int highest3 = 0;
+
 		for (Map.Entry<Integer, Integer> entry : calloriesMap.entrySet()) {
-			if (highest == null || entry.getKey() > highest.getKey()) {
-				highest = entry;
+			if (entry.getKey() > highest1) {
+				highest3 = highest2;
+				highest2 = highest1;
+				highest1 = entry.getKey();
+			} else if (entry.getKey() < highest1 && entry.getKey() > highest2) {
+				highest3 = highest2;
+				highest2 = entry.getKey();
+			} else if (entry.getKey() < highest2 && entry.getKey() > highest3) {
+				highest3 = entry.getKey();
 			}
 		}
-		return highest;
+		return highest1 + highest2 + highest3;
 	}
 
 
