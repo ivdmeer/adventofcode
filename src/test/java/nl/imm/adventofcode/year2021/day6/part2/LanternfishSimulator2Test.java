@@ -1,8 +1,7 @@
 package nl.imm.adventofcode.year2021.day6.part2;
 
-import nl.imm.adventofcode.year2021.FileHelper;
+import nl.imm.adventofcode.FileHelper;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.nio.file.Path;

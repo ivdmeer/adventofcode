@@ -1,4 +1,4 @@
-package nl.imm.adventofcode.year2021;
+package nl.imm.adventofcode;
 
 import java.io.IOException;
 import java.nio.charset.Charset;

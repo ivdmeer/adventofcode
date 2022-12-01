@@ -1,8 +1,7 @@
 package nl.imm.adventofcode.year2021.day8.part2;
 
-import nl.imm.adventofcode.year2021.FileHelper;
+import nl.imm.adventofcode.FileHelper;
 import nl.imm.adventofcode.year2021.day8.part1.Digit;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;

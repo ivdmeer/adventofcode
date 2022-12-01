@@ -1,13 +1,9 @@
 package nl.imm.adventofcode.year2021.day1.part1;
 
-import nl.imm.adventofcode.year2021.FileHelper;
-import nl.imm.adventofcode.year2021.day1.part1.Measurements;
+import nl.imm.adventofcode.FileHelper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;

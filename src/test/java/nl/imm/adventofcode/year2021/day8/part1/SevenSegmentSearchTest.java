@@ -1,7 +1,6 @@
 package nl.imm.adventofcode.year2021.day8.part1;
 
-import nl.imm.adventofcode.year2021.FileHelper;
-import org.junit.jupiter.api.Assertions;
+import nl.imm.adventofcode.FileHelper;
 import org.junit.jupiter.api.Test;
 import org.junit.platform.commons.util.StringUtils;
 

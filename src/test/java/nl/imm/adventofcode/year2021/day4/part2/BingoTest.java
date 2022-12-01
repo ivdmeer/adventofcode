@@ -1,6 +1,6 @@
 package nl.imm.adventofcode.year2021.day4.part2;
 
-import nl.imm.adventofcode.year2021.FileHelper;
+import nl.imm.adventofcode.FileHelper;
 import nl.imm.adventofcode.year2021.day4.part1.BingoCard;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -14,10 +14,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.NavigableMap;
 import java.util.Optional;
-import java.util.Set;
-import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 /**
