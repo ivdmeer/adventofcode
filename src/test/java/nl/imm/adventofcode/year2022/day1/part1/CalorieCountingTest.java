@@ -32,10 +32,10 @@ class CalorieCountingTest {
 	void exampleTest() {
 		// given
 		List<String> linesFromFile = FileHelper.readAllLinesFromFile(testDataFile);
-		Map<Integer, Integer> calloriesMap = calloriesToMap(linesFromFile);
+		Map<Integer, Integer> caloriesMap = caloriesToMap(linesFromFile);
 
 		// when
-		Map.Entry<Integer, Integer> highestValue = determineHighestCallories(calloriesMap);
+		Map.Entry<Integer, Integer> highestValue = determineHighestCalories(caloriesMap);
 
 		// then
 		assertNotNull(highestValue);
@@ -47,10 +47,10 @@ class CalorieCountingTest {
 	void exerciseTest() {
 		// given
 		List<String> linesFromFile = FileHelper.readAllLinesFromFile(exerciseDataFile);
-		Map<Integer, Integer> calloriesMap = calloriesToMap(linesFromFile);
+		Map<Integer, Integer> caloriesMap = caloriesToMap(linesFromFile);
 
 		// when
-		Map.Entry<Integer, Integer> highestValue = determineHighestCallories(calloriesMap);
+		Map.Entry<Integer, Integer> highestValue = determineHighestCalories(caloriesMap);
 
 		// then
 		assertNotNull(highestValue);
@@ -58,28 +58,28 @@ class CalorieCountingTest {
 		assertEquals(31, highestValue.getValue());
 	}
 
-	private Map<Integer, Integer> calloriesToMap(List<String> linesFromFile) {
+	private Map<Integer, Integer> caloriesToMap(List<String> linesFromFile) {
 
-		Map<Integer, Integer> calloriesMap = new HashMap<>();
+		Map<Integer, Integer> caloriesMap = new HashMap<>();
 
 		Integer index = 1;
 		Integer amount = 0;
 		for (String line : linesFromFile) {
 			if (StringUtils.isBlank(line)) {
-				calloriesMap.put(amount, index);
+				caloriesMap.put(amount, index);
 				index++;
 				amount = 0;
 			} else {
 				amount += Integer.parseInt(line);
 			}
 		}
-		calloriesMap.put(amount, index);
-		return calloriesMap;
+		caloriesMap.put(amount, index);
+		return caloriesMap;
 	}
 
-	private Map.Entry<Integer, Integer> determineHighestCallories(Map<Integer, Integer> calloriesMap) {
+	private Map.Entry<Integer, Integer> determineHighestCalories(Map<Integer, Integer> caloriesMap) {
 		Map.Entry<Integer, Integer> highest = null;
-		for (Map.Entry<Integer, Integer> entry : calloriesMap.entrySet()) {
+		for (Map.Entry<Integer, Integer> entry : caloriesMap.entrySet()) {
 			if (highest == null || entry.getKey() > highest.getKey()) {
 				highest = entry;
 			}

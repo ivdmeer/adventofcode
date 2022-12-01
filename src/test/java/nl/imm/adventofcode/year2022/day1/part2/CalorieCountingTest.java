@@ -32,10 +32,10 @@ class CalorieCountingTest {
 	void exampleTest() {
 		// given
 		List<String> linesFromFile = FileHelper.readAllLinesFromFile(testDataFile);
-		Map<Integer, Integer> calloriesMap = calloriesToMap(linesFromFile);
+		Map<Integer, Integer> caloriesMap = caloriesToMap(linesFromFile);
 
 		// when
-		int highestValue = determineHighestCallories(calloriesMap);
+		int highestValue = determineHighestCalories(caloriesMap);
 
 		// then
 		assertNotNull(highestValue);
@@ -46,41 +46,41 @@ class CalorieCountingTest {
 	void exerciseTest() {
 		// given
 		List<String> linesFromFile = FileHelper.readAllLinesFromFile(exerciseDataFile);
-		Map<Integer, Integer> calloriesMap = calloriesToMap(linesFromFile);
+		Map<Integer, Integer> caloriesMap = caloriesToMap(linesFromFile);
 
 		// when
-		int highestValue = determineHighestCallories(calloriesMap);
+		int highestValue = determineHighestCalories(caloriesMap);
 
 		// then
 		assertEquals(195292, highestValue);
 	}
 
-	private Map<Integer, Integer> calloriesToMap(List<String> linesFromFile) {
+	private Map<Integer, Integer> caloriesToMap(List<String> linesFromFile) {
 
-		Map<Integer, Integer> calloriesMap = new HashMap<>();
+		Map<Integer, Integer> caloriesMap = new HashMap<>();
 
 		Integer index = 1;
 		Integer amount = 0;
 		for (String line : linesFromFile) {
 			if (StringUtils.isBlank(line)) {
-				calloriesMap.put(amount, index);
+				caloriesMap.put(amount, index);
 				index++;
 				amount = 0;
 			} else {
 				amount += Integer.parseInt(line);
 			}
 		}
-		calloriesMap.put(amount, index);
-		return calloriesMap;
+		caloriesMap.put(amount, index);
+		return caloriesMap;
 	}
 
-	private int determineHighestCallories(Map<Integer, Integer> calloriesMap) {
+	private int determineHighestCalories(Map<Integer, Integer> caloriesMap) {
 
 		int highest1 = 0;
 		int highest2 = 0;
 		int highest3 = 0;
 
-		for (Map.Entry<Integer, Integer> entry : calloriesMap.entrySet()) {
+		for (Map.Entry<Integer, Integer> entry : caloriesMap.entrySet()) {
 			if (entry.getKey() > highest1) {
 				highest3 = highest2;
 				highest2 = highest1;
