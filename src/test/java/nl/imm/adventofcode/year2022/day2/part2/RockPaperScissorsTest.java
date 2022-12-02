@@ -1,4 +1,4 @@
-package nl.imm.adventofcode.year2022.day2.part1;
+package nl.imm.adventofcode.year2022.day2.part2;
 
 import nl.imm.adventofcode.FileHelper;
 import org.junit.jupiter.api.DisplayName;
@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 class RockPaperScissorsTest {
 
-	// https://adventofcode.com/2022/day/2
+	// https://adventofcode.com/2022/day/2#part2
 
 	private final Path exerciseDataFile = Paths.get(
 			"src/main/resources/year2022/day2/exercise-data.txt");
@@ -36,7 +36,7 @@ class RockPaperScissorsTest {
 				.sum();
 
 		// then
-		assertEquals(15, totalScore);
+		assertEquals(12, totalScore);
 	}
 
 	@Test
@@ -51,7 +51,7 @@ class RockPaperScissorsTest {
 				.sum();
 
 		// then
-		assertEquals(11666, totalScore);
+		assertEquals(12767, totalScore);
 	}
 
 	private int calculateMatchScore(RPS player, MatchResult matchResult) {
@@ -65,7 +65,7 @@ class RockPaperScissorsTest {
 		}
 
 		RPS player1 = RPS.parseString(values[0]);
-		RPS player2 = RPS.parseString(values[1]);
+		RPS player2 = handleNewStrategy(player1, RPS.parseString(values[1]));
 
 		MatchResult matchResult = determineMatchResult(player1, player2);
 		return calculateMatchScore(player2, matchResult);
@@ -103,6 +103,38 @@ class RockPaperScissorsTest {
 			}
 		};
 
+	}
+
+	private RPS handleNewStrategy(RPS player1, RPS player2) {
+		return switch (player2) {
+			case ROCK -> {
+				if (player1 == RPS.ROCK) {
+					yield RPS.SCISSORS;
+				} else if (player1 == RPS.PAPER) {
+					yield RPS.ROCK;
+				} else {
+					yield RPS.PAPER;
+				}
+			}
+			case PAPER -> {
+				if (player1 == RPS.ROCK) {
+					yield RPS.ROCK;
+				} else if (player1 == RPS.PAPER) {
+					yield RPS.PAPER;
+				} else {
+					yield RPS.SCISSORS;
+				}
+			}
+			case SCISSORS -> {
+				if (player1 == RPS.ROCK) {
+					yield RPS.PAPER;
+				} else if (player1 == RPS.PAPER) {
+					yield RPS.SCISSORS;
+				} else {
+					yield RPS.ROCK;
+				}
+			}
+		};
 	}
 
 	enum MatchResult {
