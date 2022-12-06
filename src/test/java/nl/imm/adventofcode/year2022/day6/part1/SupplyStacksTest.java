@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -62,11 +61,10 @@ class SupplyStacksTest {
 
 		int start = 0;
 		int end = 0;
-		List<String> dataList = new ArrayList<>();
 		for (String character : line.split("")) {
 			String substring = line.substring(start, end);
 			if (substring.contains(character)) {
-				while(substring.contains(character)) {
+				while (substring.contains(character)) {
 					start++;
 					substring = line.substring(start, end);
 				}
@@ -74,31 +72,8 @@ class SupplyStacksTest {
 			if (!substring.contains(character) && substring.length() == 4) {
 				return end;
 			}
-			end ++;
+			end++;
 		}
-
-
-
-//		for (String character : line.split("")) {
-//			if (!dataList.contains(character)) {
-//				if (dataList.size() == 3) {
-//					System.out.println("found start at end: " + end);
-//					return end;
-//				}
-//			} else {
-//				int index = dataList.indexOf(character);
-//				for (int i = index; i >= 0; i--) {
-//					try {
-//						dataList.remove(index);
-//					} catch (IndexOutOfBoundsException e) {
-//						//
-//					}
-//				}
-//			}
-//			dataList.add(character);
-//			end++;
-//		}
-
 		return 0;
 	}
 }
