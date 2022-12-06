@@ -37,7 +37,8 @@ class SupplyStacksTest {
 		List<String> rearrangements = linesFromFile.stream()
 				.filter(line -> line.startsWith("move"))
 				.toList();
-		Map<Integer, Stack<String>> crateStackMap = createCrateStackMapTestInput(linesFromFile);
+		//Map<Integer, Stack<String>> crateStackMap = createCrateStackMapTestInput(linesFromFile);
+		Map<Integer, Stack<String>> crateStackMap = createCrateStackMap(linesFromFile, 3);
 
 		// when
 		String topCrates = rearrangeCrates(rearrangements, crateStackMap);
@@ -66,7 +67,7 @@ class SupplyStacksTest {
 	private Map<Integer, Stack<String>> createCrateStackMap(List<String> lines, int amountOfStacks) {
 		Map<Integer, Stack<String>> cratesMap = new HashMap<>();
 		for (String line : lines) {
-			if (line.startsWith("[")) {
+			if (line.contains("[")) {
 				int startIndex = 1;
 				int untilNextIndex = 4;
 				for (int stack = 1; stack <= amountOfStacks; stack++) {
@@ -99,29 +100,6 @@ class SupplyStacksTest {
 
 		return cratesMap;
 	}
-
-	private Map<Integer, Stack<String>> createCrateStackMapTestInput(List<String> lines) {
-		Stack<String> crateStack1 = new Stack<>();
-		Stack<String> crateStack2 = new Stack<>();
-		Stack<String> crateStack3 = new Stack<>();
-
-		Map<Integer, Stack<String>> cratesMap = new HashMap<>();
-		crateStack1.push("Z");
-		crateStack1.push("N");
-
-		crateStack2.push("M");
-		crateStack2.push("C");
-		crateStack2.push("D");
-
-		crateStack3.push("P");
-
-		cratesMap.put(1, crateStack1);
-		cratesMap.put(2, crateStack2);
-		cratesMap.put(3, crateStack3);
-
-		return cratesMap;
-	}
-
 	private String rearrangeCrates(List<String> rearrangements, Map<Integer, Stack<String>> crateStackMap) {
 		for (String move : rearrangements) {
 			String[] data = move.split(" ");
