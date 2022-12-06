@@ -1,4 +1,4 @@
-package nl.imm.adventofcode.year2022.day4.par1.par1;
+package nl.imm.adventofcode.year2022.day4.par1;
 
 import nl.imm.adventofcode.FileHelper;
 import org.junit.jupiter.api.DisplayName;
