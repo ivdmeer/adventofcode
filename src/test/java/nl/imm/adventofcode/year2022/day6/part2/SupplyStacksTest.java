@@ -1,4 +1,4 @@
-package nl.imm.adventofcode.year2022.day6.part1;
+package nl.imm.adventofcode.year2022.day6.part2;
 
 import nl.imm.adventofcode.FileHelper;
 import org.junit.jupiter.api.DisplayName;
@@ -29,33 +29,42 @@ class SupplyStacksTest {
 		// given
 		List<String> linesFromFile = FileHelper.readAllLinesFromFile(testDataFile);
 
+		int startPacketIndexEnd0 = parseLine(linesFromFile.get(0), 0,0,4);
+		int startPacketIndexEnd1 = parseLine(linesFromFile.get(1), 0,0,4);
+		int startPacketIndexEnd2 = parseLine(linesFromFile.get(2), 0,0,4);
+		int startPacketIndexEnd3 = parseLine(linesFromFile.get(3), 0,0,4);
+		int startPacketIndexEnd4 = parseLine(linesFromFile.get(4), 0,0,4);
 
-		// when
-		List<Integer> starts = linesFromFile.stream()
-				.map(line -> parseLine(line, 0, 0, 4))
-				.toList();
+
+		int messageIndexEnd0 = parseLine(linesFromFile.get(0), startPacketIndexEnd0 -4, startPacketIndexEnd0 -4,14);
+		int messageIndexEnd1 = parseLine(linesFromFile.get(1), startPacketIndexEnd1 -4, startPacketIndexEnd1 -4,14);
+		int messageIndexEnd2 = parseLine(linesFromFile.get(2), startPacketIndexEnd2 -4, startPacketIndexEnd2 -4,14);
+		int messageIndexEnd3 = parseLine(linesFromFile.get(3), startPacketIndexEnd3 -4, startPacketIndexEnd3 -4,14);
+		int messageIndexEnd4 = parseLine(linesFromFile.get(4), startPacketIndexEnd4 -4, startPacketIndexEnd4 -4,14);
 
 		// then
-		assertEquals(7, starts.get(0));
-		assertEquals(5, starts.get(1));
-		assertEquals(6, starts.get(2));
-		assertEquals(10, starts.get(3));
-		assertEquals(11, starts.get(4));
+		assertEquals(19, messageIndexEnd0);
+		assertEquals(23, messageIndexEnd1);
+		assertEquals(23, messageIndexEnd2);
+		assertEquals(29, messageIndexEnd3);
+		assertEquals(26, messageIndexEnd4);
 	}
 
 	@Test
 	void exerciseTest() {
 		// given
 		List<String> linesFromFile = FileHelper.readAllLinesFromFile(exerciseDataFile);
+		int startPacketIndexEnd0 = parseLine(linesFromFile.get(0), 0,0,4);
 
 		// when
-		List<Integer> starts = linesFromFile.stream()
-				.map(line -> parseLine(line, 0, 0, 4))
-				.toList();
+		int messageIndexEnd0 = parseLine(linesFromFile.get(0), startPacketIndexEnd0 -4, startPacketIndexEnd0 -4,14);
 
 		// then
-		assertEquals(1651, starts.get(0));
+		assertEquals(3837, messageIndexEnd0);
 	}
+
+
+	//"mjq jp qmgbljsphdztnv jf qwrcgsmlb"
 	private int parseLine(String line, int start, int end, int maxLength) {
 
 		String[] characterArray = line.split("");
