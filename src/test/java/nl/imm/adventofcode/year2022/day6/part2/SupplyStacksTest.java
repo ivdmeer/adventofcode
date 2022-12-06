@@ -63,8 +63,6 @@ class SupplyStacksTest {
 		assertEquals(3837, messageIndexEnd0);
 	}
 
-
-	//"mjq jp qmgbljsphdztnv jf qwrcgsmlb"
 	private int parseLine(String line, int start, int end, int maxLength) {
 
 		String[] characterArray = line.split("");
